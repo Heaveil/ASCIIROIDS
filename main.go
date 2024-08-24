@@ -17,6 +17,7 @@ func main() {
 	level.AddEntity(&spaceship)
 	entities.SpawnAsteroids(&spaceship)
 	entities.SpawnMissile(&spaceship)
+	entities.SpawnPowerup(&spaceship)
 	// entities.SpawnEnemy(&spaceship)
 	game.Screen().SetLevel(level)
 	game.Start()

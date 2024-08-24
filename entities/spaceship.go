@@ -50,11 +50,12 @@ var SHIP_NORTHWEST = Ship_Render{
 
 type Spaceship struct {
 	*tl.Entity
-	Level *tl.BaseLevel
-	X     int
-	Y     int
-	Face  Direction
-	Score int
+	Level   *tl.BaseLevel
+	X       int
+	Y       int
+	Face    Direction
+	Score   int
+	Powered bool
 }
 
 func (spaceship *Spaceship) Render() {
@@ -164,5 +165,10 @@ func (spaceship *Spaceship) Collide(collision tl.Physical) {
 		fmt.Println("\n\n\n\n")
 		fmt.Println(spaceship.Score)
 		os.Exit(0)
+	}
+
+	if powerup, ok := collision.(*Powerup); ok {
+		spaceship.Powered = true
+		spaceship.Level.RemoveEntity(powerup)
 	}
 }
