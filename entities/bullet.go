@@ -54,6 +54,5 @@ func (bullet *Bullet) Collide(collision tl.Physical) {
 		if Asteroids.Big {
 			Asteroids.Split(bullet.Spaceship)
 		}
-
 	}
 }

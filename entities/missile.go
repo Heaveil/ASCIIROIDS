@@ -8,7 +8,7 @@ import (
 
 type Missile_Render [][]rune
 
-var MissileRender = Missile_Render {
+var MissileRender = Missile_Render{
 	{' ', '^', ' '},
 	{'<', '+', '>'},
 	{' ', 'V', ' '}}
@@ -58,7 +58,7 @@ func SpawnMissile(spaceship *Spaceship) {
 			select {
 			case <-ticker.C:
 				spawn_point := rand.Intn(4)
-				x,y := 0,0
+				x, y := 0, 0
 
 				switch spawn_point {
 				case 0:
@@ -76,10 +76,10 @@ func SpawnMissile(spaceship *Spaceship) {
 				}
 
 				missile := Missile{
-					Entity: tl.NewEntity(x, y, 3, 3),
+					Entity:    tl.NewEntity(x, y, 3, 3),
 					Spaceship: spaceship,
-					X : x,
-					Y : y,
+					X:         x,
+					Y:         y,
 				}
 				spaceship.Level.AddEntity(&missile)
 			}
