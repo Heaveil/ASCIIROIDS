@@ -75,7 +75,7 @@ func (turret *Turret) Draw(screen *tl.Screen) {
 }
 
 func SpawnTurret(spaceship *Spaceship) {
-	ticker := time.NewTicker(10 * time.Second)
+	ticker := time.NewTicker(7 * time.Second)
 	go func() {
 		for {
 			select {

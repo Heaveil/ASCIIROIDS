@@ -16,17 +16,10 @@ func main() {
 	}
 
 	level.AddEntity(&spaceship)
-	// entities.SpawnAsteroids(&spaceship)
-	// entities.SpawnMissile(&spaceship)
-	// entities.SpawnPowerup(&spaceship)
-
-	turret := entities.Turret{
-		Entity:    tl.NewEntity(10, 10, 5, 3),
-		Spaceship: &spaceship,
-	}
-	level.AddEntity(&turret)
-
-	// entities.SpawnTurret(&spaceship)
+	entities.SpawnAsteroids(&spaceship)
+	entities.SpawnMissile(&spaceship)
+	entities.SpawnPowerup(&spaceship)
+	entities.SpawnTurret(&spaceship)
 	game.Screen().SetLevel(level)
 	game.Start()
 }
