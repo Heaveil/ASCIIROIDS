@@ -57,6 +57,7 @@ type Spaceship struct {
 	Face    Direction
 	Score   int
 	Powered bool
+	Master  bool
 }
 
 func (spaceship *Spaceship) Render() {
@@ -163,6 +164,7 @@ func (Spaceship *Spaceship) Shoot() {
 func (spaceship *Spaceship) Tick(event tl.Event) {
 	if event.Type == tl.EventKey {
 		spaceship.X, spaceship.Y = spaceship.Position()
+		if spaceship.Master{
 		switch event.Ch {
 		case 'k':
 			spaceship.Face = NORTH
@@ -192,6 +194,24 @@ func (spaceship *Spaceship) Tick(event tl.Event) {
 			if event.Key == tl.KeySpace {
 				spaceship.Shoot()
 			}
+		}
+		} else {
+		switch event.Key {
+		case tl.KeyArrowUp:
+			spaceship.Face = NORTH
+			spaceship.SetPosition(spaceship.X, spaceship.Y-1)
+		case tl.KeyArrowRight:
+			spaceship.Face = EAST
+			spaceship.SetPosition(spaceship.X+1, spaceship.Y)
+		case tl.KeyArrowDown:
+			spaceship.Face = SOUTH
+			spaceship.SetPosition(spaceship.X, spaceship.Y+1)
+		case tl.KeyArrowLeft:
+			spaceship.Face = WEST
+			spaceship.SetPosition(spaceship.X-1, spaceship.Y)
+		case tl.KeyEnter:
+			spaceship.Shoot()
+		}
 		}
 	}
 }
