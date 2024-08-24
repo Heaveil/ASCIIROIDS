@@ -88,37 +88,61 @@ func (spaceship *Spaceship) Draw(screen *tl.Screen) {
     spaceship.Entity.Draw(screen)
 }
 
+func get_coords(Spaceship Spaceship) (x, y int){
+    switch Spaceship.Face {
+    case EAST:
+        x = Spaceship.X+5
+        y = Spaceship.Y+1
+    case WEST:
+        x = Spaceship.X
+        y = Spaceship.Y+1
+    default:
+        x = Spaceship.X+2
+        y = Spaceship.Y+1
+    }
+    return
+}
+
+func (Spaceship *Spaceship) Shoot(){
+    x, y := get_coords(*Spaceship)
+    bullet := Bullet {
+        Entity: tl.NewEntity(x, y, 1, 1),
+        Face : Spaceship.Face,
+    }
+    Spaceship.Level.AddEntity(&bullet)
+}
+
 func (spaceship *Spaceship) Tick(event tl.Event) {
     if event.Type == tl.EventKey {
         spaceship.X, spaceship.Y = spaceship.Position()
         switch event.Ch {
-        case 'h':
-            spaceship.Face = WEST
-            spaceship.SetPosition(spaceship.X-1, spaceship.Y)
-        case 'j':
-            spaceship.Face = SOUTH
-            spaceship.SetPosition(spaceship.X, spaceship.Y+1)
         case 'k':
             spaceship.Face = NORTH
             spaceship.SetPosition(spaceship.X, spaceship.Y-1)
-        case 'l':
-            spaceship.Face = EAST
-            spaceship.SetPosition(spaceship.X+1, spaceship.Y)
-        case 's':
-            spaceship.Face = NORTHWEST
-            spaceship.SetPosition(spaceship.X-1, spaceship.Y-1)
-        case 'd':
-            spaceship.Face = SOUTHWEST
-            spaceship.SetPosition(spaceship.X-1, spaceship.Y+1)
-        case 'f':
-            spaceship.Face = SOUTHEAST
-            spaceship.SetPosition(spaceship.X+1, spaceship.Y+1)
         case 'g':
             spaceship.Face = NORTHEAST
             spaceship.SetPosition(spaceship.X+1, spaceship.Y-1)
+        case 'l':
+            spaceship.Face = EAST
+            spaceship.SetPosition(spaceship.X+1, spaceship.Y)
+        case 'f':
+            spaceship.Face = SOUTHEAST
+            spaceship.SetPosition(spaceship.X+1, spaceship.Y+1)
+        case 'j':
+            spaceship.Face = SOUTH
+            spaceship.SetPosition(spaceship.X, spaceship.Y+1)
+        case 'd':
+            spaceship.Face = SOUTHWEST
+            spaceship.SetPosition(spaceship.X-1, spaceship.Y+1)
+        case 'h':
+            spaceship.Face = WEST
+            spaceship.SetPosition(spaceship.X-1, spaceship.Y)
+        case 's':
+            spaceship.Face = NORTHWEST
+            spaceship.SetPosition(spaceship.X-1, spaceship.Y-1)
         default :
             if event.Key == tl.KeySpace {
-                // Shoot Bullet
+                spaceship.Shoot()
             }
         }
     }
