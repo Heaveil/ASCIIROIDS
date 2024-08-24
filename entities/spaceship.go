@@ -1,6 +1,9 @@
 package entities
 
-import tl "github.com/JoelOtter/termloop"
+import (
+	"os"
+	tl "github.com/JoelOtter/termloop"
+)
 
 type Ship_Render [3][5]rune
 
@@ -107,6 +110,7 @@ func (Spaceship *Spaceship) Shoot() {
 	bullet := Bullet{
 		Entity: tl.NewEntity(x, y, 1, 1),
 		Face:   Spaceship.Face,
+		Level: Spaceship.Level,
 	}
 	Spaceship.Level.AddEntity(&bullet)
 }
@@ -144,5 +148,11 @@ func (spaceship *Spaceship) Tick(event tl.Event) {
 				spaceship.Shoot()
 			}
 		}
+	}
+}
+
+func (spaceship *Spaceship) Collide(collision tl.Physical) {
+	if _, ok := collision.(*Asteroids); ok {
+		os.Exit(0)
 	}
 }
