@@ -29,7 +29,7 @@ go run .
 - `Down Arrow`: Move down
 - `Left Arrow`: Move left
 - `Right Arrow`: Move right
-- `Space`: Shoot
+- `Enter`: Shoot
 
 ## Multiplayer Mode
 
