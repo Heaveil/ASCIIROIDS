@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type Asteroid_Render [5][9]rune
+type Asteroid_Render [][]rune
 
 var SMALL_ASTEROID = Asteroid_Render{
 	{' ', '_', '_', '_', ' '},

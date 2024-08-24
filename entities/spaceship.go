@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-type Ship_Render [3][5]rune
+type Ship_Render [][]rune
 
 var SHIP_NORTH = Ship_Render{
 	{' ', '|', ' ', '|', ' '},
@@ -155,6 +155,12 @@ func (spaceship *Spaceship) Tick(event tl.Event) {
 
 func (spaceship *Spaceship) Collide(collision tl.Physical) {
 	if _, ok := collision.(*Asteroids); ok {
+		fmt.Println("\n\n\n\n")
+		fmt.Println(spaceship.Score)
+		os.Exit(0)
+	}
+
+	if _, ok := collision.(*Missile); ok {
 		fmt.Println("\n\n\n\n")
 		fmt.Println(spaceship.Score)
 		os.Exit(0)
