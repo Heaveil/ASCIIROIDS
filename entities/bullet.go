@@ -8,7 +8,7 @@ type Bullet struct {
 	X         int
 	Y         int
 	Face      Direction
-	Enemy	  bool
+	Enemy     bool
 }
 
 func (bullet *Bullet) Draw(screen *tl.Screen) {
@@ -32,8 +32,8 @@ func (bullet *Bullet) Draw(screen *tl.Screen) {
 		bullet.SetPosition(bullet.X-1, bullet.Y-1)
 	}
 
-	if (bullet.Enemy){
-		bullet.SetCell(0, 0, &tl.Cell{Fg: tl.ColorBlue, Ch: 'x'})
+	if bullet.Enemy {
+		bullet.SetCell(0, 0, &tl.Cell{Fg: tl.ColorYellow, Ch: 'x'})
 	} else {
 		bullet.SetCell(0, 0, &tl.Cell{Fg: tl.ColorBlue, Ch: '+'})
 	}
@@ -65,7 +65,7 @@ func (bullet *Bullet) Collide(collision tl.Physical) {
 	}
 
 	if Bullet, ok := collision.(*Bullet); ok {
-		if (bullet.Enemy != Bullet.Enemy) {
+		if bullet.Enemy != Bullet.Enemy {
 			bullet.Spaceship.Level.RemoveEntity(Bullet)
 			bullet.Spaceship.Level.RemoveEntity(bullet)
 		}

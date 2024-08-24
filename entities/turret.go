@@ -21,10 +21,10 @@ type Turret struct {
 	Cooldown  bool
 }
 
-func (turret *Turret) Shoot(direction Direction){
+func (turret *Turret) Shoot(direction Direction) {
 	if !turret.Cooldown {
 		bullet := Bullet{
-			Entity:    tl.NewEntity(turret.X + 2, turret.Y + 1, 1, 1),
+			Entity:    tl.NewEntity(turret.X+2, turret.Y+1, 1, 1),
 			Face:      direction,
 			Spaceship: turret.Spaceship,
 			Enemy:     true,
@@ -68,7 +68,7 @@ func (turret *Turret) Draw(screen *tl.Screen) {
 
 	for i := 0; i < 5; i++ {
 		for j := 0; j < 3; j++ {
-			turret.SetCell(i, j, &tl.Cell{Fg: tl.ColorRed, Ch: TurretRender[j][i]})
+			turret.SetCell(i, j, &tl.Cell{Fg: tl.ColorMagenta, Ch: TurretRender[j][i]})
 		}
 	}
 	turret.Entity.Draw(screen)
@@ -103,7 +103,7 @@ func SpawnTurret(spaceship *Spaceship) {
 					Spaceship: spaceship,
 					X:         x,
 					Y:         y,
-					Cooldown: false,
+					Cooldown:  false,
 				}
 				spaceship.Level.AddEntity(&turret)
 			}
@@ -113,7 +113,7 @@ func SpawnTurret(spaceship *Spaceship) {
 
 func (turret *Turret) Collide(collision tl.Physical) {
 	if Bullet, ok := collision.(*Bullet); ok {
-		if (!Bullet.Enemy){
+		if !Bullet.Enemy {
 			turret.Spaceship.Level.RemoveEntity(Bullet)
 			turret.Spaceship.Level.RemoveEntity(turret)
 			turret.Spaceship.Score += 5

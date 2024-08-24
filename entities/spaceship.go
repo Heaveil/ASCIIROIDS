@@ -164,54 +164,54 @@ func (Spaceship *Spaceship) Shoot() {
 func (spaceship *Spaceship) Tick(event tl.Event) {
 	if event.Type == tl.EventKey {
 		spaceship.X, spaceship.Y = spaceship.Position()
-		if spaceship.Master{
-		switch event.Ch {
-		case 'k':
-			spaceship.Face = NORTH
-			spaceship.SetPosition(spaceship.X, spaceship.Y-1)
-		case 'g':
-			spaceship.Face = NORTHEAST
-			spaceship.SetPosition(spaceship.X+1, spaceship.Y-1)
-		case 'l':
-			spaceship.Face = EAST
-			spaceship.SetPosition(spaceship.X+1, spaceship.Y)
-		case 'f':
-			spaceship.Face = SOUTHEAST
-			spaceship.SetPosition(spaceship.X+1, spaceship.Y+1)
-		case 'j':
-			spaceship.Face = SOUTH
-			spaceship.SetPosition(spaceship.X, spaceship.Y+1)
-		case 'd':
-			spaceship.Face = SOUTHWEST
-			spaceship.SetPosition(spaceship.X-1, spaceship.Y+1)
-		case 'h':
-			spaceship.Face = WEST
-			spaceship.SetPosition(spaceship.X-1, spaceship.Y)
-		case 's':
-			spaceship.Face = NORTHWEST
-			spaceship.SetPosition(spaceship.X-1, spaceship.Y-1)
-		default:
-			if event.Key == tl.KeySpace {
+		if spaceship.Master {
+			switch event.Ch {
+			case 'w':
+				spaceship.Face = NORTH
+				spaceship.SetPosition(spaceship.X, spaceship.Y-1)
+			case 'l':
+				spaceship.Face = NORTHEAST
+				spaceship.SetPosition(spaceship.X+1, spaceship.Y-1)
+			case 'd':
+				spaceship.Face = EAST
+				spaceship.SetPosition(spaceship.X+1, spaceship.Y)
+			case 'k':
+				spaceship.Face = SOUTHEAST
+				spaceship.SetPosition(spaceship.X+1, spaceship.Y+1)
+			case 's':
+				spaceship.Face = SOUTH
+				spaceship.SetPosition(spaceship.X, spaceship.Y+1)
+			case 'j':
+				spaceship.Face = SOUTHWEST
+				spaceship.SetPosition(spaceship.X-1, spaceship.Y+1)
+			case 'a':
+				spaceship.Face = WEST
+				spaceship.SetPosition(spaceship.X-1, spaceship.Y)
+			case 'h':
+				spaceship.Face = NORTHWEST
+				spaceship.SetPosition(spaceship.X-1, spaceship.Y-1)
+			default:
+				if event.Key == tl.KeySpace {
+					spaceship.Shoot()
+				}
+			}
+		} else {
+			switch event.Key {
+			case tl.KeyArrowUp:
+				spaceship.Face = NORTH
+				spaceship.SetPosition(spaceship.X, spaceship.Y-1)
+			case tl.KeyArrowRight:
+				spaceship.Face = EAST
+				spaceship.SetPosition(spaceship.X+1, spaceship.Y)
+			case tl.KeyArrowDown:
+				spaceship.Face = SOUTH
+				spaceship.SetPosition(spaceship.X, spaceship.Y+1)
+			case tl.KeyArrowLeft:
+				spaceship.Face = WEST
+				spaceship.SetPosition(spaceship.X-1, spaceship.Y)
+			case tl.KeyEnter:
 				spaceship.Shoot()
 			}
-		}
-		} else {
-		switch event.Key {
-		case tl.KeyArrowUp:
-			spaceship.Face = NORTH
-			spaceship.SetPosition(spaceship.X, spaceship.Y-1)
-		case tl.KeyArrowRight:
-			spaceship.Face = EAST
-			spaceship.SetPosition(spaceship.X+1, spaceship.Y)
-		case tl.KeyArrowDown:
-			spaceship.Face = SOUTH
-			spaceship.SetPosition(spaceship.X, spaceship.Y+1)
-		case tl.KeyArrowLeft:
-			spaceship.Face = WEST
-			spaceship.SetPosition(spaceship.X-1, spaceship.Y)
-		case tl.KeyEnter:
-			spaceship.Shoot()
-		}
 		}
 	}
 }
@@ -219,26 +219,26 @@ func (spaceship *Spaceship) Tick(event tl.Event) {
 func (spaceship *Spaceship) Collide(collision tl.Physical) {
 	if _, ok := collision.(*Asteroids); ok {
 		fmt.Println("\n\n\n\n")
-		fmt.Println(spaceship.Score)
+		fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
 		os.Exit(0)
 	}
 
 	if _, ok := collision.(*Missile); ok {
 		fmt.Println("\n\n\n\n")
-		fmt.Println(spaceship.Score)
+		fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
 		os.Exit(0)
 	}
 
 	if _, ok := collision.(*Turret); ok {
 		fmt.Println("\n\n\n\n")
-		fmt.Println(spaceship.Score)
+		fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
 		os.Exit(0)
 	}
 
-	if bullet, ok := collision.(*Bullet); ok{
-		if (bullet.Enemy){
+	if bullet, ok := collision.(*Bullet); ok {
+		if bullet.Enemy {
 			fmt.Println("\n\n\n\n")
-			fmt.Println(spaceship.Score)
+			fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
 			os.Exit(0)
 		}
 	}

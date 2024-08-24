@@ -2,8 +2,8 @@ package main
 
 import (
 	"asciiroids/entities"
-	tl "github.com/JoelOtter/termloop"
 	"flag"
+	tl "github.com/JoelOtter/termloop"
 )
 
 func main() {
@@ -21,7 +21,7 @@ func main() {
 	multi := flag.Bool("multi", false, "Enable multipayer")
 	flag.Parse()
 
-	if *multi{
+	if *multi {
 		spaceship2 := entities.Spaceship{
 			Entity: tl.NewEntity(7, 0, 5, 3),
 			Level:  level,

@@ -135,13 +135,13 @@ func (asteroid *Asteroids) Render() {
 	if asteroid.Big {
 		for i := 0; i < 9; i++ {
 			for j := 0; j < 4; j++ {
-				asteroid.SetCell(i, j, &tl.Cell{Fg: tl.ColorBlue, Ch: BIG_ASTEROID[j][i]})
+				asteroid.SetCell(i, j, &tl.Cell{Fg: tl.ColorWhite, Ch: BIG_ASTEROID[j][i]})
 			}
 		}
 	} else {
 		for i := 0; i < 5; i++ {
 			for j := 0; j < 3; j++ {
-				asteroid.SetCell(i, j, &tl.Cell{Fg: tl.ColorBlue, Ch: SMALL_ASTEROID[j][i]})
+				asteroid.SetCell(i, j, &tl.Cell{Fg: tl.ColorWhite, Ch: SMALL_ASTEROID[j][i]})
 			}
 		}
 	}
