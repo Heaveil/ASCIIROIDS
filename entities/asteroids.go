@@ -2,6 +2,7 @@ package entities
 
 import (
 	tl "github.com/JoelOtter/termloop"
+	"math/rand"
 )
 
 type Asteroid_Render [5][9]rune
@@ -49,8 +50,63 @@ func NewBigAsteroid(x, y int, face Direction) (asteroid Asteroids) {
 	return
 }
 
+func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
+	randomInt := rand.Intn(4)
+	randomIntDir := rand.Intn(3)
+	randomRange := rand.Intn(21) - 10
+	switch randomInt {
+	case 0:
+		x = spaceship.X - 40
+		y = spaceship.Y + randomRange
+		switch randomIntDir {
+		case 0:
+			dir = NORTHEAST
+		case 1:
+			dir = EAST
+		case 2:
+			dir = SOUTHEAST
+		}
+	case 1:
+		x = spaceship.X + 40
+		y = spaceship.Y + randomRange
+		switch randomIntDir {
+		case 0:
+			dir = NORTHWEST
+		case 1:
+			dir = WEST
+		case 2:
+			dir = SOUTHWEST
+		}
+	case 2:
+		x = spaceship.X + randomRange
+		y = spaceship.Y + 40
+		switch randomIntDir {
+		case 0:
+			dir = SOUTHWEST
+		case 1:
+			dir = SOUTH
+		case 2:
+			dir = SOUTHEAST
+		}
+	case 3:
+		x = spaceship.X + randomRange
+		y = spaceship.Y - 40
+		switch randomIntDir {
+		case 0:
+			dir = NORTHWEST
+		case 1:
+			dir = NORTH
+		case 2:
+			dir = NORTHEAST
+		}
+	}
+	return
+}
+
 func SpawnAsteroids(Spaceship *Spaceship) {
-	asteroid := NewSmallAsteroid(5, 5, NORTH)
+
+	x, y, dir := GetSide(Spaceship)
+	asteroid := NewSmallAsteroid(x, y, dir)
 	Spaceship.Level.AddEntity(&asteroid)
 }
 
