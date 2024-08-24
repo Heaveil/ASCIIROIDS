@@ -3,6 +3,7 @@ package entities
 import (
 	tl "github.com/JoelOtter/termloop"
 	"math/rand"
+	"os"
 	"time"
 )
 
@@ -156,4 +157,10 @@ func (asteroid *Asteroids) Draw(screen *tl.Screen) {
 	}
 	asteroid.Render()
 	asteroid.Entity.Draw(screen)
+}
+
+func (spaceship *Spaceship) Collide(collision tl.Physical) {
+	if _, ok := collision.(*Asteroids); ok {
+		os.Exit(0)
+	}
 }
