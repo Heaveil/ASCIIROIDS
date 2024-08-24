@@ -4,6 +4,7 @@ import (
 	"fmt"
 	tl "github.com/JoelOtter/termloop"
 	"os"
+	"time"
 )
 
 type Ship_Render [][]rune
@@ -110,12 +111,23 @@ func get_coords(Spaceship Spaceship) (x, y int) {
 
 func (Spaceship *Spaceship) Shoot() {
 	x, y := get_coords(*Spaceship)
-	bullet := Bullet{
-		Entity:    tl.NewEntity(x, y, 1, 1),
-		Face:      Spaceship.Face,
-		Spaceship: Spaceship,
+
+	if Spaceship.Powered {
+		bigbullet := Bigbullet{
+			Entity:    tl.NewEntity(x, y, 3, 3),
+			Face:      Spaceship.Face,
+			Spaceship: Spaceship,
+		}
+		Spaceship.Level.AddEntity(&bigbullet)
+	} else {
+		bullet := Bullet{
+			Entity:    tl.NewEntity(x, y, 1, 1),
+			Face:      Spaceship.Face,
+			Spaceship: Spaceship,
+		}
+		Spaceship.Level.AddEntity(&bullet)
 	}
-	Spaceship.Level.AddEntity(&bullet)
+
 }
 
 func (spaceship *Spaceship) Tick(event tl.Event) {
@@ -170,5 +182,17 @@ func (spaceship *Spaceship) Collide(collision tl.Physical) {
 	if powerup, ok := collision.(*Powerup); ok {
 		spaceship.Powered = true
 		spaceship.Level.RemoveEntity(powerup)
+
+		// sets 5 second timer for powerup
+		ticker := time.NewTicker(5 * time.Second)
+		go func() {
+			for {
+				select {
+				case <-ticker.C:
+					spaceship.Powered = false
+				}
+			}
+		}()
+
 	}
 }

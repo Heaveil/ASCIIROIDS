@@ -93,4 +93,9 @@ func (missile *Missile) Collide(collision tl.Physical) {
 		missile.Spaceship.Level.RemoveEntity(missile)
 		missile.Spaceship.Score += 5
 	}
+	if Bigbullet, ok := collision.(*Bigbullet); ok {
+		missile.Spaceship.Level.RemoveEntity(Bigbullet)
+		missile.Spaceship.Level.RemoveEntity(missile)
+		missile.Spaceship.Score += 5
+	}
 }

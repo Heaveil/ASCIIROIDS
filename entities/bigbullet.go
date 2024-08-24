@@ -2,7 +2,15 @@ package entities
 
 import tl "github.com/JoelOtter/termloop"
 
-type Bullet struct {
+type BigBullet [][]rune
+
+var BIGBULLET = BigBullet{
+	{'+', '+', '+'},
+	{'+', '+', '+'},
+	{'+', '+', '+'},
+}
+
+type Bigbullet struct {
 	*tl.Entity
 	Spaceship *Spaceship
 	X         int
@@ -10,7 +18,7 @@ type Bullet struct {
 	Face      Direction
 }
 
-func (bullet *Bullet) Draw(screen *tl.Screen) {
+func (bullet *Bigbullet) Draw(screen *tl.Screen) {
 	bullet.X, bullet.Y = bullet.Position()
 	switch bullet.Face {
 	case NORTH:
@@ -31,23 +39,17 @@ func (bullet *Bullet) Draw(screen *tl.Screen) {
 		bullet.SetPosition(bullet.X-1, bullet.Y-1)
 	}
 
-	bullet.SetCell(0, 0, &tl.Cell{Fg: tl.ColorBlue, Ch: '+'})
+	for i := 0; i < 3; i++ {
+		for j := 0; j < 3; j++ {
+			bullet.SetCell(i, j, &tl.Cell{Fg: tl.ColorBlue, Ch: BIGBULLET[j][i]})
+		}
+	}
+
 	bullet.Entity.Draw(screen)
 
 }
 
-func (asteroid *Asteroids) Split(Spaceship *Spaceship) {
-	offsetX := 3
-	offsetY := 3
-
-	asteroid1 := NewSmallAsteroid(asteroid.X+offsetX, asteroid.Y+offsetY, asteroid.Face)
-	asteroid2 := NewSmallAsteroid(asteroid.X-offsetX, asteroid.Y-offsetY, asteroid.Face)
-
-	Spaceship.Level.AddEntity(&asteroid1)
-	Spaceship.Level.AddEntity(&asteroid2)
-}
-
-func (bullet *Bullet) Collide(collision tl.Physical) {
+func (bullet *Bigbullet) Collide(collision tl.Physical) {
 	if Asteroids, ok := collision.(*Asteroids); ok {
 		bullet.Spaceship.Level.RemoveEntity(Asteroids)
 		bullet.Spaceship.Level.RemoveEntity(bullet)

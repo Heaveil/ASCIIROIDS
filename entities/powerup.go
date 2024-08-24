@@ -2,6 +2,7 @@ package entities
 
 import (
 	tl "github.com/JoelOtter/termloop"
+	"math/rand"
 	"time"
 )
 
@@ -35,8 +36,24 @@ func SpawnPowerup(spaceship *Spaceship) {
 		for {
 			select {
 			case <-ticker.C:
-				x := 5
-				y := 5
+
+				spawn_point := rand.Intn(4)
+				x, y := 0, 0
+
+				switch spawn_point {
+				case 0:
+					x = spaceship.X + 20
+					y = spaceship.Y + 20
+				case 1:
+					x = spaceship.X - 20
+					y = spaceship.Y - 20
+				case 2:
+					x = spaceship.X - 20
+					y = spaceship.Y + 20
+				case 3:
+					x = spaceship.X + 20
+					y = spaceship.Y - 20
+				}
 
 				powerup := NewPowerup(x, y, spaceship)
 				spaceship.Level.AddEntity(powerup)
