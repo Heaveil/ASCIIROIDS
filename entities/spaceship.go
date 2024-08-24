@@ -1,6 +1,7 @@
 package entities
 
 import (
+	"fmt"
 	tl "github.com/JoelOtter/termloop"
 	"os"
 )
@@ -53,6 +54,7 @@ type Spaceship struct {
 	X     int
 	Y     int
 	Face  Direction
+	Score int
 }
 
 func (spaceship *Spaceship) Render() {
@@ -108,9 +110,9 @@ func get_coords(Spaceship Spaceship) (x, y int) {
 func (Spaceship *Spaceship) Shoot() {
 	x, y := get_coords(*Spaceship)
 	bullet := Bullet{
-		Entity: tl.NewEntity(x, y, 1, 1),
-		Face:   Spaceship.Face,
-		Level:  Spaceship.Level,
+		Entity:    tl.NewEntity(x, y, 1, 1),
+		Face:      Spaceship.Face,
+		Spaceship: Spaceship,
 	}
 	Spaceship.Level.AddEntity(&bullet)
 }
@@ -153,6 +155,8 @@ func (spaceship *Spaceship) Tick(event tl.Event) {
 
 func (spaceship *Spaceship) Collide(collision tl.Physical) {
 	if _, ok := collision.(*Asteroids); ok {
+		fmt.Println("\n\n\n\n")
+		fmt.Println(spaceship.Score)
 		os.Exit(0)
 	}
 }
