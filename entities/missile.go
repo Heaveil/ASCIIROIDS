@@ -52,7 +52,7 @@ func (missile *Missile) Draw(screen *tl.Screen) {
 }
 
 func SpawnMissile(spaceship *Spaceship) {
-	ticker := time.NewTicker(275 * time.Millisecond)
+	ticker := time.NewTicker(10 * time.Second)
 	go func() {
 		for {
 			select {
