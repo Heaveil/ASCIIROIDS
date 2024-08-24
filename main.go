@@ -1,21 +1,21 @@
 package main
 
 import (
-    tl "github.com/JoelOtter/termloop"
-    "asciiroids/entities"
+	"asciiroids/entities"
+	tl "github.com/JoelOtter/termloop"
 )
 
 func main() {
-    game := tl.NewGame()
-    game.Screen().SetFps(10)
-    level := tl.NewBaseLevel(tl.Cell{})
-    spaceship := entities.Spaceship{
-        Entity: tl.NewEntity(1, 1, 5, 3),
-        Level: level,
-        Face: entities.NORTH,
-    }
-    level.AddEntity(&spaceship)
-    entities.SpawnAsteroids(&spaceship)
-    game.Screen().SetLevel(level)
-    game.Start()
+	game := tl.NewGame()
+	game.Screen().SetFps(10)
+	level := tl.NewBaseLevel(tl.Cell{})
+	spaceship := entities.Spaceship{
+		Entity: tl.NewEntity(1, 1, 5, 3),
+		Level:  level,
+		Face:   entities.NORTH,
+	}
+	level.AddEntity(&spaceship)
+	entities.SpawnAsteroids(&spaceship)
+	game.Screen().SetLevel(level)
+	game.Start()
 }

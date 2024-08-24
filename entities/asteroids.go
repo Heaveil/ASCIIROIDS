@@ -21,14 +21,14 @@ var BIG_ASTEROID = Asteroid_Render{
 
 type Asteroids struct {
 	*tl.Entity
-	X      int
-	Y      int
-	Big    bool
-	Face   Direction
+	X    int
+	Y    int
+	Big  bool
+	Face Direction
 }
 
 func NewSmallAsteroid(x, y int, face Direction) (asteroid Asteroids) {
-	asteroid = Asteroids {
+	asteroid = Asteroids{
 		Entity: tl.NewEntity(x, y, 5, 3),
 		X:      x,
 		Y:      y,
@@ -54,7 +54,7 @@ func SpawnAsteroids(Spaceship *Spaceship) {
 	Spaceship.Level.AddEntity(&asteroid)
 }
 
-func (asteroid *Asteroids)Render(){
+func (asteroid *Asteroids) Render() {
 	if asteroid.Big {
 		for i := 0; i < 9; i++ {
 			for j := 0; j < 4; j++ {
@@ -72,24 +72,24 @@ func (asteroid *Asteroids)Render(){
 
 func (asteroid *Asteroids) Draw(screen *tl.Screen) {
 	asteroid.X, asteroid.Y = asteroid.Position()
-    switch asteroid.Face {
-    case NORTH:
-        asteroid.SetPosition(asteroid.X, asteroid.Y-1)
-    case NORTHEAST:
-        asteroid.SetPosition(asteroid.X+1, asteroid.Y-1)
-    case EAST:
-        asteroid.SetPosition(asteroid.X+1, asteroid.Y)
-    case SOUTHEAST:
-        asteroid.SetPosition(asteroid.X+1, asteroid.Y+1)
-    case SOUTH:
-        asteroid.SetPosition(asteroid.X, asteroid.Y+1)
-    case SOUTHWEST:
-        asteroid.SetPosition(asteroid.X-1, asteroid.Y+1)
-    case WEST:
-        asteroid.SetPosition(asteroid.X-1, asteroid.Y)
-    case NORTHWEST:
-        asteroid.SetPosition(asteroid.X-1, asteroid.Y-1)
-    }
-    asteroid.Render()
-    asteroid.Entity.Draw(screen)
+	switch asteroid.Face {
+	case NORTH:
+		asteroid.SetPosition(asteroid.X, asteroid.Y-1)
+	case NORTHEAST:
+		asteroid.SetPosition(asteroid.X+1, asteroid.Y-1)
+	case EAST:
+		asteroid.SetPosition(asteroid.X+1, asteroid.Y)
+	case SOUTHEAST:
+		asteroid.SetPosition(asteroid.X+1, asteroid.Y+1)
+	case SOUTH:
+		asteroid.SetPosition(asteroid.X, asteroid.Y+1)
+	case SOUTHWEST:
+		asteroid.SetPosition(asteroid.X-1, asteroid.Y+1)
+	case WEST:
+		asteroid.SetPosition(asteroid.X-1, asteroid.Y)
+	case NORTHWEST:
+		asteroid.SetPosition(asteroid.X-1, asteroid.Y-1)
+	}
+	asteroid.Render()
+	asteroid.Entity.Draw(screen)
 }
