@@ -1,8 +1,8 @@
 package entities
 
 import (
-	"os"
 	tl "github.com/JoelOtter/termloop"
+	"os"
 )
 
 type Ship_Render [3][5]rune
@@ -110,7 +110,7 @@ func (Spaceship *Spaceship) Shoot() {
 	bullet := Bullet{
 		Entity: tl.NewEntity(x, y, 1, 1),
 		Face:   Spaceship.Face,
-		Level: Spaceship.Level,
+		Level:  Spaceship.Level,
 	}
 	Spaceship.Level.AddEntity(&bullet)
 }

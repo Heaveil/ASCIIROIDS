@@ -5,9 +5,9 @@ import tl "github.com/JoelOtter/termloop"
 type Bullet struct {
 	*tl.Entity
 	Level *tl.BaseLevel
-	X    int
-	Y    int
-	Face Direction
+	X     int
+	Y     int
+	Face  Direction
 }
 
 func (bullet *Bullet) Draw(screen *tl.Screen) {
@@ -34,8 +34,8 @@ func (bullet *Bullet) Draw(screen *tl.Screen) {
 	bullet.Entity.Draw(screen)
 }
 
-func (bullet *Bullet) Collide(collision tl.Physical){
-	if Asteroids, ok:= collision.(*Asteroids); ok {
+func (bullet *Bullet) Collide(collision tl.Physical) {
+	if Asteroids, ok := collision.(*Asteroids); ok {
 		bullet.Level.RemoveEntity(Asteroids)
 		bullet.Level.RemoveEntity(bullet)
 	}
