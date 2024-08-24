@@ -54,10 +54,10 @@ func NewBigAsteroid(x, y int, face Direction) (asteroid Asteroids) {
 func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 	randomInt := rand.Intn(4)
 	randomIntDir := rand.Intn(3)
-	randomRange := rand.Intn(21) - 10
+	randomRange := rand.Intn(60) - 30
 	switch randomInt {
 	case 0:
-		x = spaceship.X - 40
+		x = spaceship.X - 30
 		y = spaceship.Y + randomRange
 		switch randomIntDir {
 		case 0:
@@ -68,7 +68,7 @@ func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 			dir = SOUTHEAST
 		}
 	case 1:
-		x = spaceship.X + 40
+		x = spaceship.X + 30
 		y = spaceship.Y + randomRange
 		switch randomIntDir {
 		case 0:
@@ -80,7 +80,7 @@ func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 		}
 	case 2:
 		x = spaceship.X + randomRange
-		y = spaceship.Y + 40
+		y = spaceship.Y + 30
 		switch randomIntDir {
 		case 0:
 			dir = SOUTHWEST
@@ -91,7 +91,7 @@ func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 		}
 	case 3:
 		x = spaceship.X + randomRange
-		y = spaceship.Y - 40
+		y = spaceship.Y - 30
 		switch randomIntDir {
 		case 0:
 			dir = NORTHWEST
@@ -105,16 +105,13 @@ func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 }
 
 func SpawnAsteroids(spaceship *Spaceship) {
-	ticker := time.NewTicker(1 * time.Second)
-
+	ticker := time.NewTicker(275 * time.Millisecond)
 	go func() {
 		for {
 			select {
 			case <-ticker.C:
-				// Get the spawn location and direction for the asteroid
 				x, y, dir := GetSide(spaceship)
 				asteroid := NewSmallAsteroid(x, y, dir)
-				// Add the asteroid to the level
 				spaceship.Level.AddEntity(&asteroid)
 			}
 		}
