@@ -35,6 +35,11 @@ func main() {
 			Master: false,
 		}
 		level.AddEntity(&spaceship2)
+
+		entities.SpawnAsteroids(&spaceship)
+		entities.SpawnMissile(&spaceship)
+		entities.SpawnPowerup(&spaceship)
+		entities.SpawnTurret(&spaceship)
 	} else if *missile {
 		missile := entities.Missile{
 			Entity:    tl.NewEntity(0, -20, 3, 3),
