@@ -219,26 +219,26 @@ func (spaceship *Spaceship) Tick(event tl.Event) {
 func (spaceship *Spaceship) Collide(collision tl.Physical) {
 	if _, ok := collision.(*Asteroids); ok {
 		fmt.Println("\n\n\n\n")
-		fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
+		fmt.Printf("SCORE | %d\n", spaceship.Score)
 		os.Exit(0)
 	}
 
 	if _, ok := collision.(*Missile); ok {
 		fmt.Println("\n\n\n\n")
-		fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
+		fmt.Printf("SCORE | %d\n", spaceship.Score)
 		os.Exit(0)
 	}
 
 	if _, ok := collision.(*Turret); ok {
 		fmt.Println("\n\n\n\n")
-		fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
+		fmt.Printf("SCORE | %d\n", spaceship.Score)
 		os.Exit(0)
 	}
 
 	if bullet, ok := collision.(*Bullet); ok {
 		if bullet.Enemy {
 			fmt.Println("\n\n\n\n")
-			fmt.Printf("HIGHSCORE | %d\n", spaceship.Score)
+			fmt.Printf("SCORE | %d\n", spaceship.Score)
 			os.Exit(0)
 		}
 	}
