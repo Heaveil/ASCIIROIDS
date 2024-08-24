@@ -44,7 +44,6 @@ var SHIP_NORTHWEST = Ship_Render{
     {'\\','-','-','-','\\'},
     {' ','~','~','~','~'}}
 
-
 type Spaceship struct {
     *tl.Entity
     Level  *tl.BaseLevel

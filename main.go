@@ -7,7 +7,7 @@ import (
 
 func main() {
     game := tl.NewGame()
-    game.Screen().SetFps(30)
+    game.Screen().SetFps(10)
     level := tl.NewBaseLevel(tl.Cell{})
     spaceship := entities.Spaceship{
         Entity: tl.NewEntity(1, 1, 5, 3),
@@ -15,6 +15,7 @@ func main() {
         Face: entities.NORTH,
     }
     level.AddEntity(&spaceship)
+    entities.SpawnAsteroids(&spaceship)
     game.Screen().SetLevel(level)
     game.Start()
 }
