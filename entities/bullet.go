@@ -63,4 +63,11 @@ func (bullet *Bullet) Collide(collision tl.Physical) {
 			Asteroids.Split(bullet.Spaceship)
 		}
 	}
+
+	if Bullet, ok := collision.(*Bullet); ok {
+		if (bullet.Enemy != Bullet.Enemy) {
+			bullet.Spaceship.Level.RemoveEntity(Bullet)
+			bullet.Spaceship.Level.RemoveEntity(bullet)
+		}
+	}
 }

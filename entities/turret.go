@@ -18,16 +18,29 @@ type Turret struct {
 	Spaceship *Spaceship
 	X         int
 	Y         int
+	Cooldown  bool
 }
 
 func (turret *Turret) Shoot(direction Direction){
-	bullet := Bullet{
-		Entity:    tl.NewEntity(turret.X + 2, turret.Y + 1, 1, 1),
-		Face:      direction,
-		Spaceship: turret.Spaceship,
-		Enemy:     true,
+	if !turret.Cooldown {
+		bullet := Bullet{
+			Entity:    tl.NewEntity(turret.X + 2, turret.Y + 1, 1, 1),
+			Face:      direction,
+			Spaceship: turret.Spaceship,
+			Enemy:     true,
+		}
+		turret.Spaceship.Level.AddEntity(&bullet)
+		turret.Cooldown = true
+		ticker := time.NewTicker(1 * time.Second)
+		go func() {
+			for {
+				select {
+				case <-ticker.C:
+					turret.Cooldown = false
+				}
+			}
+		}()
 	}
-	turret.Spaceship.Level.AddEntity(&bullet)
 }
 
 func (turret *Turret) Draw(screen *tl.Screen) {
@@ -90,6 +103,7 @@ func SpawnTurret(spaceship *Spaceship) {
 					Spaceship: spaceship,
 					X:         x,
 					Y:         y,
+					Cooldown: false,
 				}
 				spaceship.Level.AddEntity(&turret)
 			}
