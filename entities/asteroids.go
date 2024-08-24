@@ -3,6 +3,7 @@ package entities
 import (
 	tl "github.com/JoelOtter/termloop"
 	"math/rand"
+	"time"
 )
 
 type Asteroid_Render [5][9]rune
@@ -103,11 +104,21 @@ func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 	return
 }
 
-func SpawnAsteroids(Spaceship *Spaceship) {
+func SpawnAsteroids(spaceship *Spaceship) {
+	ticker := time.NewTicker(1 * time.Second)
 
-	x, y, dir := GetSide(Spaceship)
-	asteroid := NewSmallAsteroid(x, y, dir)
-	Spaceship.Level.AddEntity(&asteroid)
+	go func() {
+		for {
+			select {
+			case <-ticker.C:
+				// Get the spawn location and direction for the asteroid
+				x, y, dir := GetSide(spaceship)
+				asteroid := NewSmallAsteroid(x, y, dir)
+				// Add the asteroid to the level
+				spaceship.Level.AddEntity(&asteroid)
+			}
+		}
+	}()
 }
 
 func (asteroid *Asteroids) Render() {
