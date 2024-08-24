@@ -9,9 +9,9 @@ import (
 type Powerup_Render [][]rune
 
 var POWERUP = Powerup_Render{
-	{' ', '$', '$'},
-	{' ', '$', ' '},
-	{'$', '$', ' '},
+	{'S', 'U', 'P'},
+	{'S', 'U', 'P'},
+	{'S', 'U', 'P'},
 }
 
 type Powerup struct {

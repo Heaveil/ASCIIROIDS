@@ -109,10 +109,39 @@ func get_coords(Spaceship Spaceship) (x, y int) {
 	return
 }
 
-func (Spaceship *Spaceship) Shoot() {
-	x, y := get_coords(*Spaceship)
+func get_coords_big(Spaceship Spaceship) (x, y int) {
+	switch Spaceship.Face {
+	case NORTH:
+		x = Spaceship.X + 1
+		y = Spaceship.Y - 2
+	case NORTHEAST:
+		x = Spaceship.X + 1
+		y = Spaceship.Y - 2
+	case EAST:
+		x = Spaceship.X + 5
+		y = Spaceship.Y
+	case SOUTHEAST:
+		x = Spaceship.X + 3
+		y = Spaceship.Y + 2
+	case SOUTH:
+		x = Spaceship.X + 1
+		y = Spaceship.Y + 2
+	case SOUTHWEST:
+		x = Spaceship.X + 1
+		y = Spaceship.Y + 2
+	case WEST:
+		x = Spaceship.X - 3
+		y = Spaceship.Y
+	case NORTHWEST:
+		x = Spaceship.X + 1
+		y = Spaceship.Y - 2
+	}
+	return
+}
 
+func (Spaceship *Spaceship) Shoot() {
 	if Spaceship.Powered {
+		x, y := get_coords_big(*Spaceship)
 		bigbullet := Bigbullet{
 			Entity:    tl.NewEntity(x, y, 3, 3),
 			Face:      Spaceship.Face,
@@ -120,6 +149,7 @@ func (Spaceship *Spaceship) Shoot() {
 		}
 		Spaceship.Level.AddEntity(&bigbullet)
 	} else {
+		x, y := get_coords(*Spaceship)
 		bullet := Bullet{
 			Entity:    tl.NewEntity(x, y, 1, 1),
 			Face:      Spaceship.Face,

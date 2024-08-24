@@ -106,7 +106,7 @@ func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 
 func SpawnAsteroids(spaceship *Spaceship) {
 
-	ticker := time.NewTicker(275 * time.Millisecond)
+	ticker := time.NewTicker(400 * time.Millisecond)
 	go func() {
 		for {
 			select {
