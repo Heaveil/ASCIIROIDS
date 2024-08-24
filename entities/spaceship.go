@@ -215,6 +215,14 @@ func (spaceship *Spaceship) Collide(collision tl.Physical) {
 		os.Exit(0)
 	}
 
+	if bullet, ok := collision.(*Bullet); ok{
+		if (bullet.Enemy){
+			fmt.Println("\n\n\n\n")
+			fmt.Println(spaceship.Score)
+			os.Exit(0)
+		}
+	}
+
 	if powerup, ok := collision.(*Powerup); ok {
 		spaceship.Powered = true
 		spaceship.Level.RemoveEntity(powerup)
