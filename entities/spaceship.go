@@ -154,10 +154,10 @@ func (Spaceship *Spaceship) Shoot() {
 			Entity:    tl.NewEntity(x, y, 1, 1),
 			Face:      Spaceship.Face,
 			Spaceship: Spaceship,
+			Enemy:     false,
 		}
 		Spaceship.Level.AddEntity(&bullet)
 	}
-
 }
 
 func (spaceship *Spaceship) Tick(event tl.Event) {
@@ -209,6 +209,12 @@ func (spaceship *Spaceship) Collide(collision tl.Physical) {
 		os.Exit(0)
 	}
 
+	if _, ok := collision.(*Turret); ok {
+		fmt.Println("\n\n\n\n")
+		fmt.Println(spaceship.Score)
+		os.Exit(0)
+	}
+
 	if powerup, ok := collision.(*Powerup); ok {
 		spaceship.Powered = true
 		spaceship.Level.RemoveEntity(powerup)
@@ -223,6 +229,5 @@ func (spaceship *Spaceship) Collide(collision tl.Physical) {
 				}
 			}
 		}()
-
 	}
 }

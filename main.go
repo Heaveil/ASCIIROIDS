@@ -15,10 +15,11 @@ func main() {
 		Face:   entities.NORTH,
 	}
 	level.AddEntity(&spaceship)
-	entities.SpawnAsteroids(&spaceship)
-	entities.SpawnMissile(&spaceship)
-	entities.SpawnPowerup(&spaceship)
-	// entities.SpawnTurret(&spaceship)
+	// entities.SpawnAsteroids(&spaceship)
+	// entities.SpawnMissile(&spaceship)
+	// entities.SpawnPowerup(&spaceship)
+
+	entities.SpawnTurret(&spaceship)
 	game.Screen().SetLevel(level)
 	game.Start()
 }

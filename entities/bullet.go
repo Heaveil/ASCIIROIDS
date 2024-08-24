@@ -8,6 +8,7 @@ type Bullet struct {
 	X         int
 	Y         int
 	Face      Direction
+	Enemy	  bool
 }
 
 func (bullet *Bullet) Draw(screen *tl.Screen) {
@@ -31,7 +32,12 @@ func (bullet *Bullet) Draw(screen *tl.Screen) {
 		bullet.SetPosition(bullet.X-1, bullet.Y-1)
 	}
 
-	bullet.SetCell(0, 0, &tl.Cell{Fg: tl.ColorBlue, Ch: '+'})
+	if (bullet.Enemy){
+		bullet.SetCell(0, 0, &tl.Cell{Fg: tl.ColorBlue, Ch: 'x'})
+	} else {
+		bullet.SetCell(0, 0, &tl.Cell{Fg: tl.ColorBlue, Ch: '+'})
+	}
+
 	bullet.Entity.Draw(screen)
 
 }
