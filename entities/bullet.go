@@ -34,11 +34,26 @@ func (bullet *Bullet) Draw(screen *tl.Screen) {
 	bullet.Entity.Draw(screen)
 }
 
+func (asteroid *Asteroids) Split(Spaceship *Spaceship) {
+	offsetX := 3
+	offsetY := 3
+
+	asteroid1 := NewSmallAsteroid(asteroid.X+offsetX, asteroid.Y+offsetY, asteroid.Face)
+	asteroid2 := NewSmallAsteroid(asteroid.X-offsetX, asteroid.Y-offsetY, asteroid.Face)
+
+	Spaceship.Level.AddEntity(&asteroid1)
+	Spaceship.Level.AddEntity(&asteroid2)
+}
+
 func (bullet *Bullet) Collide(collision tl.Physical) {
 	if Asteroids, ok := collision.(*Asteroids); ok {
 		bullet.Spaceship.Level.RemoveEntity(Asteroids)
 		bullet.Spaceship.Level.RemoveEntity(bullet)
 		bullet.Spaceship.Score += 5
+
+		if Asteroids.Big {
+			Asteroids.Split(bullet.Spaceship)
+		}
 
 	}
 }

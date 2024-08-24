@@ -105,13 +105,26 @@ func GetSide(spaceship *Spaceship) (x, y int, dir Direction) {
 }
 
 func SpawnAsteroids(spaceship *Spaceship) {
+
 	ticker := time.NewTicker(275 * time.Millisecond)
 	go func() {
 		for {
 			select {
 			case <-ticker.C:
 				x, y, dir := GetSide(spaceship)
-				asteroid := NewSmallAsteroid(x, y, dir)
+
+				randomInt := rand.Intn(2)
+				var asteroid Asteroids
+
+				switch randomInt {
+
+				case 0:
+					asteroid = NewSmallAsteroid(x, y, dir)
+
+				case 1:
+					asteroid = NewBigAsteroid(x, y, dir)
+				}
+
 				spaceship.Level.AddEntity(&asteroid)
 			}
 		}
