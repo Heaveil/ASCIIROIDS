@@ -61,7 +61,7 @@ func (turret *Turret) Shoot(direction Direction) {
 	}
 }
 
-func (turret *Turret) Draw(screen *tl.Screen) {
+func (turret *Turret) Move() {
 	dx, dy := 0, 0
 	turret.X, turret.Y = turret.Position()
 	spaceshipX, spaceshipY := turret.Spaceship.Position()
@@ -81,7 +81,10 @@ func (turret *Turret) Draw(screen *tl.Screen) {
 	if direction, ok := determineDirection(dx, dy); ok {
 		turret.Shoot(direction)
 	}
+}
 
+func (turret *Turret) Draw(screen *tl.Screen) {
+	turret.Move()
 	for i := 0; i < 5; i++ {
 		for j := 0; j < 3; j++ {
 			turret.SetCell(i, j, &tl.Cell{Fg: tl.ColorMagenta, Ch: TURRET[j][i]})

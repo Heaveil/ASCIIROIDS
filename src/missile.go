@@ -18,7 +18,7 @@ func NewMissile(x, y int, spaceship *Spaceship) *Missile {
 	}
 }
 
-func (missile *Missile) Draw(screen *tl.Screen) {
+func (missile *Missile) Move() {
 	dx, dy := 0, 0
 	missile.X, missile.Y = missile.Position()
 	spaceshipX, spaceshipY := missile.Spaceship.Position()
@@ -36,7 +36,10 @@ func (missile *Missile) Draw(screen *tl.Screen) {
 	}
 
 	missile.SetPosition(missile.X+dx, missile.Y+dy)
+}
 
+func (missile *Missile) Draw(screen *tl.Screen) {
+	missile.Move()
 	for i := 0; i < 3; i++ {
 		for j := 0; j < 3; j++ {
 			missile.SetCell(i, j, &tl.Cell{Fg: tl.ColorRed, Ch: MISSILE[j][i]})
