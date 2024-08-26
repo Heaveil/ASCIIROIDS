@@ -1,41 +1,41 @@
-# Game README
+# WELCOME TO ASCIIROIDS
 
 ## How to Run
 
-To run the game, use the following command:
+Run the game using the following commands (--vim for vim mode, --multi for multiplayer mode)
 
 ```
 go run .
-
+go run . --vim
+go run . --multi
 ```
 
 ## Controls
 
-### Player 1
+### Player 1 (Normal)
 
-- `W`: Move up
-- `A`: Move left
-- `S`: Move down
-- `D`: Move right
-- `H`: Move up-left
-- `J`: Move down-left
-- `K`: Move down-right
-- `L`: Move up-right
-- `Space`: Shoot bullet
+- `w`: Up
+- `a`: Left
+- `s`: Down
+- `d`: Right
+- `space`: Shoot
+
+### Player 1 (Vim)
+
+- `h`: Left 
+- `j`: Down
+- `k`: Up
+- `l`: Right
+- `s`: Up-Left
+- `d`: Down-Left
+- `f`: Down-Right
+- `g`: Up-Right
+- `space`: Shoot 
 
 ### Player 2
 
-- `Up Arrow`: Move up
-- `Down Arrow`: Move down
-- `Left Arrow`: Move left
-- `Right Arrow`: Move right
-- `Enter`: Shoot
-
-## Multiplayer Mode
-
-To enable multiplayer mode, run the game with the following command:
-
-```
-go run . --multi
-
-```
+- `↑`: Up
+- `↓`: Down
+- `←`: Left
+- `→`: Right
+- `enter`: Shoot
