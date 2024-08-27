@@ -13,6 +13,9 @@ func (bullet *BigBullet) Collide(collision tl.Physical) {
 		bullet.Spaceship.Level.RemoveEntity(bullet)
 		if Asteroid.Big {
 			Asteroid.Split(bullet.Spaceship)
+			bullet.Spaceship.Score += 3
+		} else {
+			bullet.Spaceship.Score += 1
 		}
 	}
 
@@ -25,11 +28,13 @@ func (bullet *BigBullet) Collide(collision tl.Physical) {
 		bullet.Spaceship.Level.AddEntity(NewMissile(Turret.X, Turret.Y, bullet.Spaceship))
 		bullet.Spaceship.Level.RemoveEntity(bullet)
 		bullet.Spaceship.Level.RemoveEntity(Turret)
+		bullet.Spaceship.Score += 2
 	}
 
 	if Missile, ok := collision.(*Missile); ok {
 		bullet.Spaceship.Level.RemoveEntity(bullet)
 		bullet.Spaceship.Level.RemoveEntity(Missile)
+		bullet.Spaceship.Score += 3
 	}
 }
 
@@ -39,6 +44,9 @@ func (bullet *Bullet) Collide(collision tl.Physical) {
 		bullet.Spaceship.Level.RemoveEntity(Asteroid)
 		if Asteroid.Big {
 			Asteroid.Split(bullet.Spaceship)
+			bullet.Spaceship.Score += 3
+		} else {
+			bullet.Spaceship.Score += 1
 		}
 	}
 
@@ -54,12 +62,14 @@ func (bullet *Bullet) Collide(collision tl.Physical) {
 			bullet.Spaceship.Level.AddEntity(NewMissile(Turret.X, Turret.Y, bullet.Spaceship))
 			bullet.Spaceship.Level.RemoveEntity(bullet)
 			bullet.Spaceship.Level.RemoveEntity(Turret)
+			bullet.Spaceship.Score += 2
 		}
 	}
 
 	if Missile, ok := collision.(*Missile); ok {
 		bullet.Spaceship.Level.RemoveEntity(bullet)
 		bullet.Spaceship.Level.RemoveEntity(Missile)
+		bullet.Spaceship.Score += 3
 	}
 }
 
