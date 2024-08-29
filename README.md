@@ -4,7 +4,7 @@
 
 ![One Player Demo](./assets/single.gif)
 
-## Multi Player
+## Multiplayer
 
 ![Multi Player Demo](./assets/multi.gif)
 
