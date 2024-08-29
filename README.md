@@ -1,5 +1,13 @@
 # WELCOME TO ASCIIROIDS
 
+## One Player
+
+![One Player Demo](./assets/single.gif)
+
+## Multi Player
+
+![Multi Player Demo](./assets/multi.gif)
+
 ## How to Run
 
 Run the game using the following commands (--vim for vim mode, --multi for multiplayer mode)
